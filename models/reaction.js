@@ -17,7 +17,10 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now()
+            default: Date.now(),
+            get: function(date) {
+                return dayjs(date).format
+            }
         }
     }
 )
