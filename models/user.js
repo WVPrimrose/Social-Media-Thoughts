@@ -11,8 +11,7 @@ const userSchema = new Schema(
         email: {
             type: String,
             required: true,
-            unique: true,
-            
+            unique: true,            
         },
         thoughts: {},
         friends: [{ type: Schema.Types.ObjectId, ref: 'friends'}],
@@ -30,6 +29,12 @@ userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 })
 
+// want to validate if the email matches
+// create error message if the email doesn't match
+// wantt o make sure we save the email (regex... maybe)
+
+
 const User = model('user', userSchema)
+
 
 module.exports = User
