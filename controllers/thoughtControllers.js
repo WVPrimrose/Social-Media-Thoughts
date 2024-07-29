@@ -55,5 +55,32 @@ module.exports = {
         }   catch (err) {
             res.status(500).json(err)
         }
-    }    
+    },
+    // get thought by reaction
+    async getThoughtByReaction(req, res) {
+        try {
+            const thought = await Thoughts.findOne({_id: req.params.thoughtId})
+            res.json()
+        }   catch (err) {
+            res.status(500).json(err)
+        }
+    },
+    // create a reaction
+    async createReaction(req, res) {
+        try {
+            const thought = await Thoughts.create()
+            res.json()
+        }   catch (err) {
+            res.status(500).json(err)
+        }
+    },
+    // delete a reaction
+    async deleteReaction(req, res) {
+        try {
+            const thought = await Thoughts.findOneAndDelete()
+            res.json()
+        }   catch (err) {
+            res.status(500).json (err)
+        }
+    }
 }

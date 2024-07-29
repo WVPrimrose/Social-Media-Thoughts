@@ -12,12 +12,12 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: {
-                validator: function(v) {
-                  return /\d{3}-\d{3}-\d{4}/.test(v);
-                },
-                message: props => `${props.value} is not a valid email!`
-              },            
+            // validate: {
+            //     validator: function(v) {
+            //       return /\d{3}-\d{3}-\d{4}/.test(v);
+            //     },
+            //     message: props => `${props.value} is not a valid email!`
+            //   },            
         },
         thoughts: [
             {
@@ -25,7 +25,7 @@ const userSchema = new Schema(
                 ref: 'thoughts',
             },
         ],
-        friends: [{ type: Schema.Types.ObjectId, ref: 'friends'}],
+        friends: [{ type: Schema.Types.ObjectId, ref: 'user'}],
     },
     {
         toJSON: {
