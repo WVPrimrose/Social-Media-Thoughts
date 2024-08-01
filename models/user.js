@@ -12,12 +12,12 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            // validate: {
-            //     validator: function(v) {
-            //       return /\d{3}-\d{3}-\d{4}/.test(v);
-            //     },
-            //     message: props => `${props.value} is not a valid email!`
-            //   },            
+            validate: {
+                validator: function(v) {
+                  return /^([a-zA-Z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
+                },
+                message: props => `${props.value} is not a valid email!`
+              },            
         },
         thoughts: [
             {

@@ -55,7 +55,7 @@ module.exports = {
     async deleteUser(req, res) {
         try {
             const user = await User.findOneAndDelete({ _id: req.params.userId });
-            res.json()
+            res.send('Deleted user!')
         } catch (err) {
             res.status(500).json(err)
         }
@@ -87,8 +87,10 @@ module.exports = {
     // delete friend
     async deleteFriend(req, res) {
         try {
-            const user = await User.findOneAndDelete()
-            res.json(user)
+            const user = await User.findOneAndDelete(
+                {_id: req.params.userId}
+            )
+            res.send('Deleted friend!')
         } catch (err) {
             res.status(500).json(err)
         }
