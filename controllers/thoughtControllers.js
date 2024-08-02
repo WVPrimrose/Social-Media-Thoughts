@@ -14,7 +14,7 @@ module.exports = {
     // get a single thought by id
     async getSingleThought(req, res) {
         try {
-            const thought = await Thoughts.findOne({ _id: req.params.thoughtId })
+            const thought = await Thoughts.findOne({ id: req.params.thoughtId })
             .select('-_v');
 
             if(!thought) {
@@ -38,19 +38,21 @@ module.exports = {
     async updateThought(req, res) {
         try {
             const thought = await Thoughts.findOneAndUpdate(
-                {_id: req.paramas.thoughtId},
+                { id: req.paramas.thoughtId },
                 { $set: req.body },
-                { runValidators: true, new: true}
+                { runValidators: true, new: true},
+                
             );
             res.json(thought);
         }   catch (err) {
             res.status(500).json(err)
         }
+        console.log(thought)
     },
     // delete thought by id
     async deleteThought(req, res) {
         try {
-            const thought = await Thoughts.findOneAndDelete({_id: req.params.thoughtId});
+            const thought = await Thoughts.findOneAndDelete({ id: req.params.thoughtId });
             res.json()
         }   catch (err) {
             res.status(500).json(err)
