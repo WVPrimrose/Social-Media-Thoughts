@@ -28,7 +28,6 @@ module.exports = {
     },
     // create user
     async createUser(req, res) {
-        console.log("Anything")
         try {
             const user = await User.create(req.body);
             console.log(user)
@@ -42,6 +41,7 @@ module.exports = {
     async updateUser(req, res) {
         try {
             const user = await User.findOneAndUpdate(
+                console.log(user),
                 { _id: req.params.userId },
                 { $set: req.body },
                 { runValidators: true, new: true }
@@ -56,6 +56,7 @@ module.exports = {
         try {
             const user = await User.findOneAndDelete({ _id: req.params.userId });
             res.send('Deleted user!')
+            console.log(user)
         } catch (err) {
             res.status(500).json(err)
         }
