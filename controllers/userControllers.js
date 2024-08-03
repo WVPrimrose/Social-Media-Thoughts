@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongoose').Types;
-const { User, Thoughts } = require('../models');
+const { User, Thought } = require('../models');
 
 module.exports = {
     // get all users
@@ -55,7 +55,6 @@ module.exports = {
         try {
             const user = await User.findOneAndDelete({ id: req.params.userId });
             res.send('Deleted user!')
-            console.log(user)
         } catch (err) {
             res.status(500).json(err)
         }

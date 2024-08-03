@@ -40,11 +40,6 @@ userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 })
 
-// want to validate if the email matches
-// create error message if the email doesn't match
-// wantt o make sure we save the email (regex... maybe)
-
-
 const User = model('user', userSchema)
 
 
