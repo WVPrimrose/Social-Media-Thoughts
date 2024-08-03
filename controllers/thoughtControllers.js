@@ -30,8 +30,10 @@ module.exports = {
         try {
             const thought = await Thought.create(req.body);
             res.json(thought)
+            console.log(thought)
         }   catch (err) {
             res.status(500).json(err)
+            console.log(err)
         }
     },
     // update thought by id
@@ -54,8 +56,10 @@ module.exports = {
         try {
             const thought = await Thought.findOneAndDelete({ id: req.params.thoughtId });
             res.json()
+            console.log(thought)
         }   catch (err) {
             res.status(500).json(err)
+            console.log(err)
         }
     },
     // get thought by reaction
@@ -81,8 +85,10 @@ module.exports = {
         try {
             const thought = await Thought.findOneAndDelete()
             res.json()
+            console.log(thought)
         }   catch (err) {
-            res.status(500).json (err)
+            res.status(500).json(err)
+            console.log(err)
         }
     }
 }
