@@ -14,8 +14,7 @@ const thoughtsSchema = new Schema(
             type: Date,
             default: Date.now(),
             get: function(date) {
-                console.log({date})
-                return dayjs(date).format()
+                return dayjs(date).format("MM/DD/YYYYTHH:mm:ss")
             }
         },
         username: {
