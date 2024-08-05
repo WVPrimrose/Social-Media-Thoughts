@@ -5,7 +5,7 @@ module.exports = {
     // get all users
     async getUsers(req, res) {
         try {
-            const users = await User.find();
+            const users = await User.find().populate('thoughts');
             res.json(users);
         } catch (err) {
             return res.status(500).json(err)
@@ -14,7 +14,7 @@ module.exports = {
     // get single user
     async getSingleUser(req, res) {
         try {
-            const user = await User.findOne({ id: req.params.userId })
+            const user = await User.findOne({ id: req.params.id })
                 .select('-_v');
 
             if (!user) {
@@ -41,19 +41,21 @@ module.exports = {
     async updateUser(req, res) {
         try {
             const user = await User.findOneAndUpdate(
-                { id: req.params.userId },
+                { _id: req.params.id },
                 { $set: req.body },
                 { runValidators: true, new: true }
             );
+            console.log(user)
             res.json(user);
         } catch (err) {
+            console.log(err)
             res.status(500).json(err)
         }
     },
     // delete user
     async deleteUser(req, res) {
         try {
-            const user = await User.findOneAndDelete({ id: req.params.userId });
+            const user = await User.findOneAndDelete({ _id: req.params.id });
             res.send('Deleted user!')
         } catch (err) {
             res.status(500).json(err)
