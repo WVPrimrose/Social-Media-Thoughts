@@ -34,7 +34,7 @@ module.exports = {
             res.json(user);
         } catch (err) {
             console.log(err)
-            res.status(500).json(err) 
+            res.status(500).json(err)
         }
     },
     // update user
@@ -77,7 +77,8 @@ module.exports = {
         try {
             const user = await User.findOneAndUpdate(
                 { _id: req.params.id },
-            { $addToSet: {friends: req.params.friendId}})
+                { $addToSet: { friends: req.params.friendId } },
+                { runValidators: true, new: true })
             console.log(user)
             res.json(user)
         } catch (err) {
@@ -88,8 +89,10 @@ module.exports = {
     // delete friend
     async deleteFriend(req, res) {
         try {
-            const user = await User.findOneAndDelete(
-                {_id: req.params.friendId}
+            const user = await User.findOneAndUpdate(
+                { _id: req.params.friendId },
+                { $pull: { friends: req.params.friendId } },
+                { runValidators: true, new: true }
             )
             res.send('Deleted friend!')
         } catch (err) {

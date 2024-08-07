@@ -63,7 +63,7 @@ module.exports = {
     // get thought by reaction
     async getThoughtByReaction(req, res) {
         try {
-            const thought = await Thought.findOne({_id: req.params.ids})
+            const thought = await Thought.findOne({_id: req.params.id})
             res.json()
         }   catch (err) {
             res.status(500).json(err)
@@ -72,7 +72,11 @@ module.exports = {
     // create a reaction
     async createReaction(req, res) {
         try {
-            const thought = await Thought.create()
+            const thought = await Thought.findOneAndUpdate(
+                { _id: req.params.id },
+                { $addToSet: {reactions: req.params.reactionId}},
+                { new: true }
+            )
             res.json(thought)
         }   catch (err) {
             res.status(500).json(err)
@@ -81,7 +85,11 @@ module.exports = {
     // delete a reaction
     async deleteReaction(req, res) {
         try {
-            const thought = await Thought.findOneAndDelete()
+            const thought = await Thought.findOneAndUpdate(
+                { _id: req.params.id },
+                { $pull: {reactions: req.params.reactionId}},
+                { new: true}
+            )
             res.send('Deleted Reaction')
             console.log(thought)
         }   catch (err) {
