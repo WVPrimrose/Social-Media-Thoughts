@@ -19,7 +19,7 @@ router
 .delete(deleteThought)
 
 router.route('/:id/reactions').get(getThoughtByReaction)
-router
-.post(createReaction)
+.put(createReaction)
+router.route('/:id/reactions/:reactionId')
 .delete(deleteReaction)
 module.exports = router;
