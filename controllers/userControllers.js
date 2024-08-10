@@ -14,7 +14,7 @@ module.exports = {
     // get single user
     async getSingleUser(req, res) {
         try {
-            const user = await User.findOne({ id: req.params.id }).populate('thoughts')
+            const user = await User.findOne({ _id: req.params.id }).populate('thoughts')
                 .select('-_v');
 
             if (!user) {

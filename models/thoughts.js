@@ -32,8 +32,6 @@ const thoughtsSchema = new Schema(
     }
 )
 
-console.log(thoughtsSchema.createdAt)
-
 thoughtsSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 })
