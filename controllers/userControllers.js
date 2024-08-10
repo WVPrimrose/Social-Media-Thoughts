@@ -21,7 +21,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No user with that ID' })
             }
 
-            res.json()
+            res.json(user)
         } catch (err) {
             return res.status(500).json(err);
         }
@@ -30,10 +30,8 @@ module.exports = {
     async createUser(req, res) {
         try {
             const user = await User.create(req.body);
-            console.log(user)
             res.json(user);
         } catch (err) {
-            console.log(err)
             res.status(500).json(err)
         }
     },
@@ -45,10 +43,8 @@ module.exports = {
                 { $set: req.body },
                 { runValidators: true, new: true }
             );
-            console.log(user)
             res.json(user);
         } catch (err) {
-            console.log(err)
             res.status(500).json(err)
         }
     },
@@ -66,10 +62,8 @@ module.exports = {
         try {
             const user = await User.findOne({ _id: req.params.friendId })
             res.json(user)
-            console.log(user)
         } catch (err) {
             res.status(500).json(err)
-            console.log(err)
         }
     },
     // create friend
@@ -81,7 +75,6 @@ module.exports = {
                 { runValidators: true, new: true })
             res.json(user)
         } catch (err) {
-            console.log(err)
             res.status(500).json(err)
         }
     },
@@ -93,10 +86,8 @@ module.exports = {
                 { $pull: { friends: req.params.friendId }},
                 { runValidators: true, new: true }
             )
-            console.log(user)
             res.json(user)
         } catch (err) {
-            console.log(err)
             res.status(500).json(err)
 
         }
