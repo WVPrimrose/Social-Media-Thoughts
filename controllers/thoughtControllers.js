@@ -79,10 +79,8 @@ module.exports = {
                 { new: true }
             )
             res.json(thought)
-            console.log(thought)
         }   catch (err) {
             res.status(500).json(err)
-            console.log(err)
         }
     },
     // delete a reaction
@@ -93,11 +91,9 @@ module.exports = {
                 { $pull: {reactions: { reactionId:req.params.reactionId }}},
                 { new: true}
             )
-            console.log(thought)
             res.send('Deleted Reaction')
         }   catch (err) {
             res.status(500).json(err)
-            console.log(err)
         }
     }
 }
